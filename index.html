@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Imortal Tricolor</title>
+    <style>
+        body {
+            background-color: #0080ff; /* Azul Grêmio */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculadora {
+            background-color: #000; /* Preto */
+            padding: 20px;
+            border-radius: 15px;
+            border: 4px solid #fff; /* Branco */
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 280px;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .resultado {
+            background-color: #eee;
+            font-weight: bold;
+            color: #004da1;
+        }
+
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input[type="button"] {
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            background-color: #fff;
+            color: #000;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0080ff;
+            color: #fff;
+        }
+
+        .btn-azul {
+            background-color: #0080ff !important;
+            color: #fff !important;
+        }
+    </style>
+
+    <script>
+        function calcula(operacao) {
+            let v1 = parseFloat(document.getElementById('valor1').value);
+            let v2 = parseFloat(document.getElementById('valor2').value);
+            let res = 0;
+
+            if (isNaN(v1) && operacao !== 'sqrt') {
+                alert("Insira os números, vivente!");
+                return;
+            }
+
+            switch (operacao) {
+                case '+': res = v1 + v2; break;
+                case '-': res = v1 - v2; break;
+                case '*': res = v1 * v2; break;
+                case '/': res = v2 !== 0 ? v1 / v2 : "Erro"; break;
+                case 'pow': res = Math.pow(v1, v2); break;
+                case 'sqrt': 
+                    res = Math.sqrt(v1); 
+                    break;
+            }
+
+            document.getElementById('resultado').value = res;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="calculadora">
+        <h2>Grêmio FBPA</h2>
+        <form name="calc">
+            <input type="number" id="valor1" placeholder="Valor 1">
+            <input type="number" id="valor2" placeholder="Valor 2 (ou expoente)">
+            
+            <div class="botoes">
+                <input type="button" value="+" onClick="calcula('+')">
+                <input type="button" value="-" onClick="calcula('-')">
+                <input type="button" value="*" onClick="calcula('*')">
+                <input type="button" value="/" onClick="calcula('/')">
+                <input type="button" value="xʸ" title="Potência" class="btn-azul" onClick="calcula('pow')">
+                <input type="button" value="√" title="Raiz Quadrada" class="btn-azul" onClick="calcula('sqrt')">
+            </div>
+
+            <p style="color: white; margin-top: 15px;">Resultado:</p>
+            <input type="text" id="resultado" class="resultado" readonly>
+        </form>
+    </div>
+
+</body>
+</html>
